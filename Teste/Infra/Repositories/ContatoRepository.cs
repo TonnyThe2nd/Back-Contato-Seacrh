@@ -4,6 +4,7 @@ using Dapper;
 using Teste.Domain.Entities;
 using Teste.Domain.Repositories;
 using Teste.Infra.Data;
+using Teste.Infra.Services;
 
 namespace Teste.Infra.Repositories
 {
@@ -190,6 +191,7 @@ namespace Teste.Infra.Repositories
         {
             try
             {
+                var contato = GetContatoById(id);
                 _uow.GetConnection().Execute(
                     "DELETE FROM Telefone WHERE IdContato = @Id",
                     new { Id = id },
@@ -201,7 +203,7 @@ namespace Teste.Infra.Repositories
                     new { Id = id },
                     _uow.GetTransaction()
                 );
-
+                LogService.RegistrarExclusão(id, contato.Nome);
                 _uow.CommitTransaction();
                 return true;
             }

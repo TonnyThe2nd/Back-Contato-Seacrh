@@ -1,0 +1,3 @@
+[20/02/2026 08:10:07] CONTATO EXCLUÍDO - ID: 11 - Nome: antonio teste teste
+[20/02/2026 08:14:58] CONTATO EXCLUÍDO - ID: 5 - Nome: Pedro
+[20/02/2026 08:18:00] CONTATO EXCLUÍDO - ID: 12 - Nome: Pedro

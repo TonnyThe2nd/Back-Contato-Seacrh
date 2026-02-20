@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\matensy\\Documents\\Projetos back\\Back-Contato-Seacrh\\Teste\\Teste.csproj": {}
+    "C:\\Users\\antonioso\\source\\repos\\Teste\\Teste\\Teste.csproj": {}
   },
   "projects": {
-    "C:\\Users\\matensy\\Documents\\Projetos back\\Back-Contato-Seacrh\\Teste\\Teste.csproj": {
+    "C:\\Users\\antonioso\\source\\repos\\Teste\\Teste\\Teste.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\matensy\\Documents\\Projetos back\\Back-Contato-Seacrh\\Teste\\Teste.csproj",
+        "projectUniqueName": "C:\\Users\\antonioso\\source\\repos\\Teste\\Teste\\Teste.csproj",
         "projectName": "Teste",
-        "projectPath": "C:\\Users\\matensy\\Documents\\Projetos back\\Back-Contato-Seacrh\\Teste\\Teste.csproj",
-        "packagesPath": "C:\\Users\\matensy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\matensy\\Documents\\Projetos back\\Back-Contato-Seacrh\\Teste\\obj\\",
+        "projectPath": "C:\\Users\\antonioso\\source\\repos\\Teste\\Teste\\Teste.csproj",
+        "packagesPath": "C:\\Users\\antonioso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\antonioso\\source\\repos\\Teste\\Teste\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\matensy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\antonioso\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -44,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "10.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -86,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
