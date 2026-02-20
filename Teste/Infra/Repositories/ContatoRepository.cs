@@ -31,7 +31,7 @@ namespace Teste.Infra.Repositories
                 foreach (var numero in contato.Telefone)
                 {
                     _uow.GetConnection().Execute(
-                        "INSERT INTO Telefone (IdContato, Numero) VALUES (@IdContato, @Numero)",
+                        "insert into dbo.Telefone (IdContato, Numero) VALUES (@IdContato, @Numero)",
                         new { IdContato = contatoId, Numero = numero },
                         _uow.GetTransaction()
                     );
@@ -259,14 +259,36 @@ namespace Teste.Infra.Repositories
         {
             try
             {
-                const string sql = @"
-                    select c.*, t.Id, t.Numero 'Telefone'
-                    from dbo.contato c
-                    left join dbo.telefone t ON t.idContato = c.id
-                    where t.Numero like @numero
-                    ";
-                var contato = _uow.GetConnection().Query<Domain.Entities.Contato>(sql, new { numero = $"%{numero}%" }).ToList();
-                return contato;
+                var sql = @"
+                    SELECT c.Id, c.Nome, c.Idade,
+                           t.Numero
+                    FROM Contato c
+                    LEFT JOIN Telefone t ON t.IdContato = c.Id
+                    WHERE t.Numero LIKE @numero";
+
+                var contatoDict = new Dictionary<long, Domain.Entities.Contato>();
+
+                var lista = _uow.GetConnection().Query<Domain.Entities.Contato, string, Domain.Entities.Contato>(
+                    sql,
+                    (contato, numero) =>
+                    {
+                        if (!contatoDict.TryGetValue(contato.Id, out var contatoEntry))
+                        {
+                            contatoEntry = contato;
+                            contatoEntry.Telefone = new List<string>();
+                            contatoDict.Add(contato.Id, contatoEntry);
+                        }
+
+                        if (!string.IsNullOrEmpty(numero))
+                            contatoEntry.Telefone.Add(numero);
+
+                        return contatoEntry;
+                    },
+                    new { Numero = $"%{numero}%" },
+                    splitOn: "Numero"
+                );
+
+                return contatoDict.Values.ToList();
             }
             catch
             {
