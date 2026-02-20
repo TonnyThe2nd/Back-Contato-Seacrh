@@ -61,7 +61,7 @@ namespace Teste.Infra.Repositories
         public Contato GetContatoById(int id)
         {
             var contato = _uow.GetConnection().QuerySingleOrDefault<Contato>(
-                "SELECT Id, Nome, Idade FROM Contato WHERE Id = @Id",
+                "select Id, Nome, Idade from Contato where Id = @Id",
                 new { Id = id }
             );
 
@@ -69,7 +69,7 @@ namespace Teste.Infra.Repositories
                 return null;
 
             var telefones = _uow.GetConnection().Query<string>(
-                "SELECT Numero FROM Telefone WHERE IdContato = @Id",
+                "select Numero from Telefone where IdContato = @Id",
                 new { Id = id }
             ).ToList();
 
@@ -130,7 +130,7 @@ namespace Teste.Infra.Repositories
             try
             {
                 var sql = new StringBuilder();
-                sql.Append("UPDATE Contato SET ");
+                sql.Append("update Contato set ");
 
                 var parametros = new DynamicParameters();
                 parametros.Add("Id", id);
@@ -152,13 +152,13 @@ namespace Teste.Infra.Repositories
                 if (updates.Any())
                 {
                     sql.Append(string.Join(", ", updates));
-                    sql.Append(" WHERE Id = @Id");
+                    sql.Append(" where Id = @Id");
 
                     _uow.GetConnection().Execute(sql.ToString(), parametros, _uow.GetTransaction());
                 }
 
                 _uow.GetConnection().Execute(
-                    "DELETE FROM Telefone WHERE IdContato = @Id",
+                    "delete from Telefone where IdContato = @Id",
                     new { Id = id },
                     _uow.GetTransaction()
                 );
@@ -168,7 +168,7 @@ namespace Teste.Infra.Repositories
                     foreach (var numero in contato.Telefone)
                     {
                         _uow.GetConnection().Execute(
-                            "INSERT INTO Telefone (IdContato, Numero) VALUES (@Id, @Numero)",
+                            "insert into Telefone (IdContato, Numero) VALUES (@Id, @Numero)",
                             new { Id = id, Numero = numero },
                             _uow.GetTransaction()
                         );
@@ -193,13 +193,13 @@ namespace Teste.Infra.Repositories
             {
                 var contato = GetContatoById(id);
                 _uow.GetConnection().Execute(
-                    "DELETE FROM Telefone WHERE IdContato = @Id",
+                    "delete from Telefone where IdContato = @Id",
                     new { Id = id },
                     _uow.GetTransaction()
                 );
 
                 _uow.GetConnection().Execute(
-                    "DELETE FROM Contato WHERE Id = @Id",
+                    "delete from Contato where Id = @Id",
                     new { Id = id },
                     _uow.GetTransaction()
                 );
@@ -220,11 +220,11 @@ namespace Teste.Infra.Repositories
             try
             {
                 var sql = @"
-                    SELECT c.Id, c.Nome, c.Idade,
+                    select c.Id, c.Nome, c.Idade,
                            t.Numero
-                    FROM Contato c
-                    LEFT JOIN Telefone t ON t.IdContato = c.Id
-                    WHERE c.Nome LIKE @Nome";
+                    from Contato c
+                    left join Telefone t ON t.IdContato = c.Id
+                    where c.Nome LIKE @Nome";
 
                 var contatoDict = new Dictionary<long, Domain.Entities.Contato>();
 
@@ -262,11 +262,11 @@ namespace Teste.Infra.Repositories
             try
             {
                 var sql = @"
-                    SELECT c.Id, c.Nome, c.Idade,
+                    select c.Id, c.Nome, c.Idade,
                            t.Numero
-                    FROM Contato c
-                    LEFT JOIN Telefone t ON t.IdContato = c.Id
-                    WHERE t.Numero LIKE @numero";
+                    from Contato c
+                    left join Telefone t ON t.IdContato = c.Id
+                    where t.Numero LIKE @numero";
 
                 var contatoDict = new Dictionary<long, Domain.Entities.Contato>();
 

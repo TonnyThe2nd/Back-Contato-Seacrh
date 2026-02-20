@@ -54,7 +54,7 @@ namespace Teste.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateContato(int id, [FromBody]Contato contato)
+        public IActionResult UpdateContato(int id, [fromBody]Contato contato)
         {
             try
             {
